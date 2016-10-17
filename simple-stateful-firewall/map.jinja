@@ -1,0 +1,17 @@
+{% set ssf = salt['grains.filter_by']({
+    'Debian': {
+        'pkgs': ['iptables','iptables-persistent'],
+        'service': 'iptables-persistent',
+    },
+    'RedHat': {
+        'pkgs': salt['grains.filter_by']({
+            'RedHat': ['iptables','iptables-services'] if salt['grains.get']('osmajorrelease')>6 else ['iptables'],
+            'default':  ['iptables'],
+            }, grain='os'),
+        'service': 'iptables'
+    },
+    'default': {
+        'pkgs': ['iptables'],
+        'service': 'iptables'
+    }
+}, merge=salt['pillar.get']('ssf:install')) %}

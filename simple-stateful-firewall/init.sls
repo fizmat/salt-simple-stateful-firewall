@@ -1,5 +1,6 @@
 include:
-  {%- if salt['pillar.get']('ssf_flush') %}
+  - .install
+  {%- if salt['pillar.get']('ssf:flush') %}
   - .flush
   {%- endif %}
   - .pre-filter
