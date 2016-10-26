@@ -5,7 +5,7 @@
     },
     'RedHat': {
         'pkgs': salt['grains.filter_by']({
-            'RedHat': ['iptables','iptables-services'] if salt['grains.get']('osmajorrelease')>6 else ['iptables'],
+            'CentOS': ['iptables','iptables-services'] if salt['grains.get']('osmajorrelease')>6 else ['iptables'],
             'default':  ['iptables'],
             }, grain='os'),
         'service': 'iptables'
